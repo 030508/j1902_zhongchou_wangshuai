@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.j1902.mapper.UserMapper">
+
+    <select id="users" resultType="com.qf.j1902.pojo.User">
+        SELECT * FROM  user
+    </select>
+
+    <sql id="sqlAdd">
+        uname,
+        password,
+        email,
+        customer
+    </sql>
+    <insert id="addUser" parameterType="com.qf.j1902.pojo.User">
+        INSERT
+        INTO
+        user
+        (<include refid="sqlAdd"></include>)
+          VALUES
+        (#{uname},#{password},#{email},#{customer})
+
+    </insert>
+    <delete id="deleteUser"  parameterType="com.qf.j1902.pojo.User">
+        DELETE FROM user WHERE uid =#{uid}
+    </delete>
+    <select id="findUser" parameterType="int" resultType="com.qf.j1902.pojo.User">
+         SELECT * FROM  user WHERE uid =#{uid}
+    </select>
+    <update id="updateUser" parameterType="com.qf.j1902.pojo.User">
+        UPDATE user SET  uname= #{uname} ,email= #{email} WHERE uid =#{uid}
+    </update>
+</mapper>

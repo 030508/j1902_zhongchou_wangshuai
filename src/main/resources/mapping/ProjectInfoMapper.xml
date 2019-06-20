@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.j1902.mapper.ProjectInfoMapper">
+    <sql id="infoId">
+        tagId,
+        entryName,
+        synopsis,
+        amount,
+        days,
+        headimg,
+        detailsimg,
+        selfintro,
+        detailed,
+        call1,
+        centercall,
+        zhangtai,
+        uname
+    </sql>
+    <sql id="Sql2">
+        pifnfoId,
+        tagId,
+        entryName,
+        synopsis,
+        amount,
+        days,
+        headimg,
+        detailsimg,
+        selfintro,
+        detailed,
+        call1,
+        centercall,
+        account,
+        idcard,
+        zhangtai,
+        uname
+    </sql>
+    <insert id="addPinfo" parameterType="com.qf.j1902.pojo.ProjectInfo">
+        INSERT
+        INTO
+        projectinfo
+        (<include refid="infoId"></include>)
+        VALUES
+        ( #{tagId},	#{entryName},	#{synopsis},	#{amount},	#{days},	#{headimg},
+        #{detailsimg},	#{selfintro},	#{detailed},	#{call},	#{centercall},
+        #{zhangtai},	#{uname})
+    </insert>
+    <update id="updateBaocun" parameterType="com.qf.j1902.pojo.ProjectInfo">
+            UPDATE
+            projectinfo
+            SET
+            account=#{account},idcard=#{idcard}
+            WHERE
+            entryName=#{entryName}
+    </update>
+    <update id="updateTijao" parameterType="com.qf.j1902.pojo.ProjectInfo">
+            UPDATE
+            projectinfo
+            SET
+            account=#{account},idcard=#{idcard},zhangtai=#{zhangtai}
+            WHERE
+            entryName=#{entryName}
+    </update>
+    <update id="updateOne" parameterType="com.qf.j1902.pojo.ProjectInfo">
+            UPDATE
+            projectinfo
+            SET
+           pifnfoId=#{pifnfoId},tagId=#{tagId},entryName=#{entryName},synopsis=#{synopsis},
+           amount=#{amount},days=#{days},headimg=#{headimg},detailsimg=#{detailsimg},
+           selfintro=#{selfintro},detailed=#{detailed},call=#{call},centercall=#{centercall},
+           account=#{account},idcard=#{idcard},zhangtai=#{zhangtai},uname=#{uname}
+            WHERE
+            pifnfoid=#{pifnfoid}
+    </update>
+    <select id="plist" parameterType="com.qf.j1902.pojo.ProjectInfo">
+        SELECT 
+        <include refid="Sql2"></include>
+        FROM
+        projectinfo
+        WHERE
+        uname=#{uname}
+    </select>
+
+    <select id="projectInfo" parameterType="com.qf.j1902.pojo.ProjectInfo">
+        SELECT
+        <include refid="Sql2"></include>
+        FROM
+        projectinfo
+        WHERE
+        pifnfoid=#{pifnfoid}
+    </select>
+    <select id="plists" parameterType="com.qf.j1902.pojo.ProjectInfo">
+        SELECT
+        <include refid="Sql2"></include>
+        FROM
+        projectinfo
+    </select>
+</mapper>

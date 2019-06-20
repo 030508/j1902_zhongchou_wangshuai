@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.j1902.mapper.AccountMapper">
+    <sql id="sqlid">
+    type,
+    name,
+    namber,
+    phone,
+    img,
+    email,
+    uname,
+    code
+    </sql>
+    <insert id="addAccount" parameterType="com.qf.j1902.pojo.Account">
+        INSERT
+        INTO
+        account
+        (<include refid="sqlid"></include>)
+        VALUES
+        (#{type},#{name},#{namber},#{phone},#{img},#{email},#{uname},#{code})
+    </insert>
+    <select id="findOne" resultType="com.qf.j1902.pojo.Account">
+        SELECT * FROM  account WHERE  uname=#{uname}
+    </select>
+    <select id="findAll" resultType="com.qf.j1902.pojo.Account">
+        SELECT * FROM  account
+    </select>
+    <update id="updateOne" parameterType="com.qf.j1902.pojo.Account">
+        UPDATE account SET code=#{code}  WHERE id =#{id}
+    </update>
+</mapper>
